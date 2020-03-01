@@ -16,12 +16,16 @@ class AnimalCell: UITableViewCell {
     @IBOutlet weak var animalNameLabel: UILabel!
     @IBOutlet weak var noiseButton: UIButton!
 
+    var didTapNoise: ((Animal) -> Void)?
+    var animal: Animal?
+    
     override func awakeFromNib() {
         super.awakeFromNib()
         self.layer.cornerRadius = 4
     }
 
     func configureCell(_ animal: Animal) {
+        self.animal = animal
         self.emojiLabel.text = animal.emoji
         self.animalNameLabel.text = animal.name
     }
@@ -29,7 +33,8 @@ class AnimalCell: UITableViewCell {
     //MARK:- ACTION BUTTON
     
     @IBAction func noiseButtonPressed(_ sender: Any) {
-        
+        guard let unwrappedAnimal = animal else {return}
+        didTapNoise?(unwrappedAnimal)
     }
     
 

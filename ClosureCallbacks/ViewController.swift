@@ -42,8 +42,11 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AnimalCell") as! AnimalCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AnimalCell") as! AnimalCell 
         cell.configureCell(animals[indexPath.row])
+        cell.didTapNoise = { animal in
+            Alert.show(title: animal.emoji ?? "", message: animal.sound ?? "", view: self)
+        }
         return cell
     }
 }
