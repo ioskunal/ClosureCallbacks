@@ -14,6 +14,10 @@ class ViewController: UIViewController {
     
     @IBOutlet weak var animalsTableView: UITableView!
     
+    //MARK:- VARIABLES
+    
+    let animals: [Animal] = Animal.getAnimals()
+
     //MARK:- PREDEFINED
     
     override func viewDidLoad() {
@@ -33,12 +37,13 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return animals.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "AnimalCell") as! AnimalCell
+        cell.configureCell(animals[indexPath.row])
         return cell
     }
 }
