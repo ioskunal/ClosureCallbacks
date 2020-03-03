@@ -16,12 +16,14 @@ class AnimalCell: UITableViewCell {
     @IBOutlet weak var animalNameLabel: UILabel!
     @IBOutlet weak var noiseButton: UIButton!
 
+    //MARK:- VARIABLES
+
     var didTapNoise: ((Animal) -> Void)?
     var animal: Animal?
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        self.layer.cornerRadius = 4
+        self.noiseButton.layer.cornerRadius = 4
     }
 
     func configureCell(_ animal: Animal) {

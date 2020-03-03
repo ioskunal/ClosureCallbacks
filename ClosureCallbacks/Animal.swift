@@ -8,7 +8,6 @@
 
 import Foundation
 
-
 struct Animal {
     
     var emoji: String?

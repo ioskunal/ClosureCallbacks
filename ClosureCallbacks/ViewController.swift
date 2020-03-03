@@ -17,7 +17,7 @@ class ViewController: UIViewController {
     //MARK:- VARIABLES
     
     let animals: [Animal] = Animal.getAnimals()
-
+    
     //MARK:- PREDEFINED
     
     override func viewDidLoad() {
@@ -32,7 +32,13 @@ class ViewController: UIViewController {
         animalsTableView.dataSource = self
         animalsTableView.rowHeight = 72
     }
+    
+    func noiseTapped(_ animal: Animal) -> Void {
+        Alert.show(title: animal.emoji ?? "", message: animal.sound ?? "", view: self)
+    }
 }
+
+//MARK:- EXTENSION
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
     
@@ -41,12 +47,9 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AnimalCell") as! AnimalCell 
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AnimalCell") as! AnimalCell
         cell.configureCell(animals[indexPath.row])
-        cell.didTapNoise = { animal in
-            Alert.show(title: animal.emoji ?? "", message: animal.sound ?? "", view: self)
-        }
+        cell.didTapNoise = noiseTapped
         return cell
     }
 }
